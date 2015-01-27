@@ -3,16 +3,17 @@
 
 ## 前言
 
-这篇指南介绍了大量的 http + json 的api设计风格，最初摘录自heroku平台的api设计指引 [Heroku 平台 API 指引](https://devcenter.heroku.com/articles/platform-api-reference).
+这篇指南介绍了大量的 HTTP+JSON 的api设计风格，最初摘录自heroku平台的api设计指引 [Heroku 平台 API 指引](https://devcenter.heroku.com/articles/platform-api-reference)。
 
-这篇指南除了当前那些API，同时也适用于heroku平台新集成的api,我们希望那些在heroku之外的api设计者也感兴趣！
+这篇指南除了介绍那些API，同时也适用于heroku平台新集成的API,我们希望那些在Heroku之外的API设计者也感兴趣。
 
-我们的目标是一致性，专注业务逻辑同时避免设计上的空想，我们一直在寻找一种良好的，统一的，显而易见的API设计方式，未必只有一种方式。
+我们的目标是一致性，专注业务逻辑同时避免设计上的空想。我们一直在寻找一种良好的、统一的、显而易见的API设计方式，未必只有一种方式。
 
-我们假设你熟悉基本的 http+json api 设计方式，但是，不一定包含在此篇指南里面的所有内容。
+我们假设你熟悉基本的 HTTP+JSON API 设计方式，但是，不一定包含在此篇指南里面的所有内容。
+
+我们欢迎你为这篇指南做[贡献](https://github.com/interagent/http-api-design/blob/master/CONTRIBUTING.md)。
 
 ## 内容
-
 *  [返回合适的状态码](#返回合适的状态码)
 *  [提供全部可用的资源](#提供全部可用的资源)
 *  [在请求的body体使用JSON数据](#在请求的body体使用JSON数据)
@@ -36,22 +37,69 @@
 *  [要求传输通道安全](#要求传输通道安全)
 *  [使用友好的JSON输出](#使用友好的JSON输出)
 
-### 返回合适的状态码
+### 基础
 
-为每一次的响应返回合适的HTTP状态码. 成功的HTTP响应应该使用如下的状态码:
+#### 要求 TLS
 
-* `200`: `GET`请求成功, 以及`DELETE`或
-  `PATCH` 同步请求完成
-* `201`: `POST` 同步请求完成
-* `202`: `POST`, `DELETE`, 或 `PATCH` 异步请求将要完成
-* `206`: `GET` 请求成功, 这里只是一部分状态码: 更多 
+访问 API 要求 TLS, 没有例外。 不值得去解析什么时间需要 TLS 什么时候不需要，任何访问都要求 TLS。
 
-对于用户请求的错误情况，及服务器的异常错误情况，请查阅完整的HTTP状态码[HTTP response code spec](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)。
+理想情况下，拒绝任何非 TLS 请求，不响应基于 http 或是80端口的请求去避免任何不安全的数据交换。环境中不响应的情况返回状态`403 Forbidden`。
 
-### 提供全部可用的资源
+重定向是不推荐的，因为他们允许不好的客户端的行为，不提供任何明确的目标。客户依赖重定会加倍服务器流量和渲染 TLS 也没有作用，因为敏感数据已经无用在第一次调用已经暴露。
+ 
+#### 指定可接受头信息的版本
 
-提供全部可显现的资源 (例如. 这个对象的所有属性) 不用考虑全部可能响应的状态码，总是在响应码为200或是201时返回所有可用资源, 包含 `PUT`/`PATCH` 和 `DELETE`
+在开始的时候指定API版本，通过`Accepts`与自定义内容类型头(content type)同时传递版本, 例如:
+
+```
+Accept: application/vnd.heroku+json; version=3
+```
+
+最好不要给出一个默认的版本, 而是要求客户端明确指明他们要使用特定的版本。
+
+#### 支持Etags缓存
+
+在所有请求响应中包含一个`ETag`头，比如，标识出返回资源的指定版本。用户在请求中提供的头信息`If-None-Match`，在随后的返回中检查出那些过期数据。
+
+#### 使用请求ID（Request-Ids）追踪请求
+
+为每一个请求响应包含一个`Request-Id`字段，使用UUID生成该ID。如果服务器和客户端同时记录下这些内容，这样对于跟踪和调试请求非常有帮助。
+
+#### 按范围分页
+
+对于服务器响应的大量数据我们应该为此分页。
+使用`Content-Range` 头传递分页请求。这里有个例子详细的说明了请求和响应头、状态码，限制条件、排序以及分页处理：[Heroku Platform API on Ranges](https://devcenter.heroku.com/articles/platform-api-reference#ranges).
+
+
+###请求（Requests）
+
+#### 返回合适的状态码
+
+为每一次的响应返回合适的HTTP状态码. 好的响应应该使用如下的状态码:
+
+* `200`: `GET`请求成功, 及`DELETE`或`PATCH`同步请求完成，或者`PUT`同步更新一个已存在的资源
+* `201`: `POST` 同步请求完成，或者`PUT`同步创建一个新的资源
+* `202`: `POST`, `PUT`, `DELETE`, 或 `PATCH` 请求接收，将被异步处理
+* `206`: `GET` 请求成功, 但是只返回一部分，参考：[上文中范围分页](#按范围分页)
+
+使用身份认证（authentication）和授权（authorization）错误码时需要注意：
+
+* `401 Unauthorized`: 用户未认证，请求失败
+* `403 Forbidden`: 用户无权限访问该资源，请求失败
+
+当用户请求错误时，提供合适的状态码可以提供额外的信息：
+
+* `422 Unprocessable Entity`: 请求被服务器正确解析，但是包含无效字段
+* `429 Too Many Requests`: 因为访问频繁，你已经被限制访问，稍后重试
+* `500 Internal Server Error`: 服务器错误，确认状态并报告问题
+
+对于用户错误和服务器错误情况状态码，参考：  [HTTP response code spec](https://tools.ietf.org/html/rfc7231#section-6)
+
+#### 提供全部可用的资源
+
+提供全部可显现的资源 (例如. 这个对象的所有属性) ，当响应码为200或是201时返回所有可用资源, 包含 `PUT`/`PATCH` 和 `DELETE`
 请求, 例如:
+
 
 ```
 $ curl -X DELETE \  
@@ -68,8 +116,7 @@ Content-Type: application/json;charset=utf-8
 }
 ```
 
-当请求状态码为202时，不返回所有可用资源,
-e.g.:
+当请求状态码为202时，不返回所有可用资源，例如：
 
 ```
 $ curl -X DELETE \  
@@ -81,9 +128,9 @@ Content-Type: application/json;charset=utf-8
 {}
 ```
 
-### 在请求的body体使用JSON数据
+#### 在请求的body体使用JSON格式数据
 
-在 `PUT`/`PATCH`/`POST` 请求的body体使用JSON格式数据, 而不是使用 form 表单形式的数据. 这里我们使用JSON格式的body请求创建对称的格式数据, 例如.:
+在 `PUT`/`PATCH`/`POST` 请求的正文（request bodies）中使用JSON格式数据，而不是使用 form 表单形式的数据。这与我们使用JSON格式返回请求相对应, 例如.:
 
 ```
 $ curl -X POST https://service.com/apps \
@@ -101,22 +148,87 @@ $ curl -X POST https://service.com/apps \
 }
 ```
 
-### 提供资源的唯一标识
+#### 使用统一的资源路径格式
 
-在默认情况给每一个资源一个`id`属性. 用此作为唯一标识除非你有更好的理由不用.不要使用那种在服务器上或是资源中不是全局唯一的标识，比如自动增长的id标识。
+##### 资源名（Resource names）
 
-返回的唯一标识要用小写字母并加个分割线格式 `8-4-4-4-12`, 例如.:
+使用复制形式为资源命名，除非这个资源在系统中是单例的 (例如，在大多数系统中，给定的用户帐户只有一个)。 这种方式保持了特定资源的统一性。
+
+##### 形为（Actions）
+
+好的末尾展现形式不许要为某个资源指定特殊的形为，在某些特殊情况下，指定特殊的资源的形为是必须的，为了清楚的描述，用一个标准的`actions`前缀去放置他们:
+
+```
+/resources/:resource/actions/:action
+```
+
+例如：
+
+```
+/runs/{run_id}/actions/stop
+```
+
+#### 路径和属性要小写
+
+为了和域名对齐，使用小写字母和`-`分割路径名字，例如:
+
+```
+service-api.com/users
+service-api.com/app-setups
+```
+
+属性同样也要用小写字母, 但是属性名字要用下划线`_`分割，因为这样在JavaScript语言中不用输入引号。 例如：
+
+```
+service_class: "first"
+```
+
+#### 支持方便的无id间接引用
+
+在某些情况下，让用户提供ID去定位资源是不方便的。例如，一个用户想取得他在Heroku平台app信息，但是这个app的唯一标识是UUID。这种情况下，你应该支持接口通过名字和ID都能访问，例如:
+
+```
+$ curl https://service.com/apps/{app_id_or_name}
+$ curl https://service.com/apps/97addcf0-c182
+$ curl https://service.com/apps/www-prod
+```
+不要只接受使用名字而放弃了使用id。
+
+#### 最小化路径嵌套
+
+在一些有父路径/子路径嵌套关系的资源数据模块中, 路径可能有非常深的嵌套关系, 例如:
+
+```
+/orgs/{org_id}/apps/{app_id}/dynos/{dyno_id}
+```
+
+推荐在根(root)路径下指定资源来限制路径的嵌套深度。使用嵌套指定范围的资源。例如在上面的情况下，dyno属于app，app属于org可以表示为:
+
+```
+/orgs/{org_id}
+/orgs/{org_id}/apps
+/apps/{app_id}
+/apps/{app_id}/dynos
+/dynos/{dyno_id}
+```
+
+### 响应（Responses）
+
+#### 提供资源的(UU)ID
+
+在默认情况给每一个资源一个`id`属性。使用UUID除非你有更好的理由不用。不要使用那种在服务器上或是资源中不是全局唯一的标识，尤其是自动增长的id。
+
+生成小写的UUID格式 `8-4-4-4-12`，例如：
 
 ```
 "id": "01234567-89ab-cdef-0123-456789abcdef"
 ```
 
-### 提供标准的时间戳
+#### 提供标准的时间戳
 
-提供默认的资源创建时间，更新时间 `created_at` and `updated_at` ,
-e例如:
+为资源提供默认的创建时间 `created_at` 和更新时间 `updated_at`，例如:
 
-```json
+```
 {
   ...
   "created_at": "2012-01-01T12:00:00Z",
@@ -125,69 +237,35 @@ e例如:
 }
 ```
 
-这些时间戳可能不适用于某些资源，这种情况下可以忽略省去。
+有些资源不需要使用时间戳那么就忽略这两个字段。
 
-### 使用ISO8601的国际化时间格式 
+#### 使用UTC（世界标准时间）时间，用ISO8601进行格式化
 
-在接收的返回时间数据时只使用UTC格式. 查阅ISO8601时间格式,
-例如:
+在接收和返回时都只使用UTC格式。ISO8601格式的数据，例如:
 
 ```
 "finished_at": "2012-01-01T12:00:00Z"
 ```
 
-### 使用统一的资源路径
-
-#### 资源命名
-
-使用复制形式为资源命名，而不是在系统中有争议的一个单个资源 (例如，在大多数系统中，给定的用户帐户只有一个). 这种方式保持了特定资源的统一性.
-
-#### 形为
-
-好的末尾展现形式不许要指定特殊的资源形为，在某些情况下，指定特殊的资源的形为是必须的,用一个标准的`actions`前缀去替代他, 清楚的描述他:
-
-```
-/resources/:resource/actions/:action
 ```
 
-例如.
+#### 嵌套外键关系
+
+使用嵌套对象序列化外键关联，例如.:
 
 ```
-/runs/{run_id}/actions/stop
-```
-
-### 路径和属性要用小写字母
-
-使用小写字母并用`-`短线分割路径名字,并且紧跟着主机域名 e.g:
-
-```
-service-api.com/users
-service-api.com/app-setups
-```
-
-同样属性也要用小写字母, 但是属性名字要用下划线`_`分割，以至于这样在javaScript语言中不用输入引号。 例如.:
-
-```
-service_class: "first"
-```
-
-### 嵌套外键关系
-
-序列化的外键关系通常建立在一个有嵌套关系的对象之上, 例如.:
-
-```json
 {
   "name": "service-production",
   "owner": {
     "id": "5d8201b0..."
   },
-  ...
+  // ...
 }
 ```
   
-而不是这样 例如:
+而不是像这样:
 
-```json
+```
 {
   "name": "service-production",
   "owner_id": "5d8201b0...",
@@ -195,9 +273,9 @@ service_class: "first"
 }
 ```
 
-这种方式尽可能的把相关联的资源信息内联在一起，而不用改变响应资源的结构,或者展示更高一级的响应区域, 例如:
+这种方式尽可能的把相关联的资源信息内联在一起，而不用改变资源的结构，或者引入更多的字段 例如:
 
-```json
+```
 {
   "name": "service-production",
   "owner": {
@@ -209,27 +287,15 @@ service_class: "first"
 }
 ```
 
-### 支持方便的无id间接引用
+#### 生成结构化的错误
 
-在某些情况下，为了方便用户使用接口，在末尾提供用id标识资源,例如，一个用户想到了他在heroku平台app的名字，但是这个app的唯一标识是id,这种情况下，你想让接口通过名字和id都能访问，例如:
-
-```
-$ curl https://service.com/apps/{app_id_or_name}
-$ curl https://service.com/apps/97addcf0-c182
-$ curl https://service.com/apps/www-prod
-```
-不要只接受使用名字而剔除了使用id。
-
-### 构建错误信息
-
-在网络请求响应错误的时候，返回统一的，结构化的错误信息。要包含一个机器可读的错误 `id`,一个人类能识别的错误信息 `message`, 根据情况可以添加一个`url` ，告诉客户端关于这个错误的更多信息以及如何去解决它。
-例如:
+响应错误的时，生成统一的、结构化的错误信息。包含一个机器可读的错误 `id`，一个人类能识别的错误信息（`message`）, 根据情况可以添加一个`url`来告诉客户端关于这个错误的更多信息以及如何去解决它，例如:
 
 ```
 HTTP/1.1 429 Too Many Requests
 ```
 
-```json
+```
 {
   "id":      "rate_limit",
   "message": "Account reached its API rate limit.",
@@ -237,55 +303,37 @@ HTTP/1.1 429 Too Many Requests
 }
 ```
 
-把你的错误信息格式文档化，以及这些可能的错误信息`id`s 让客户端能获取到.
+文档化客户端可能遇到的错误信息格式，以及这些可能的错误信息`id`。
 
-### 支持Etags缓存
+#### 显示频率限制状态
 
-在所有请求响应中包含一个`ETag`头,比如，标识出返回资源的指定版本. 用户能够根据他们提供的头信息`If-None-Match`，在随后的请求中检查出那些无效的。
-
-
-### 用id来跟踪每次的请求
-
-在每一个API响应中要包含一个`Request-Id`头信息, 通常用唯一标识UUID. 如果服务器和客户端都打印出他们的`Request-Id`, 这对我们的网络请求调试和跟踪非常有帮助.
-
-### 按范围分页
-
-对于服务器响应的大量数据我们应该为此分页。
-使用`Content-Range` 头传递分页请求的数据.这里有个例子详细的说明了请求和响应头、状态码，限制条件、排序以及分页处理：[Heroku Platform API on Ranges](https://devcenter.heroku.com/articles/platform-api-reference#ranges).
-
-### 显示速度限制状态
-
-客户端的访问速度限制可以维护服务器的良好状态，进而为其他客户端请求提供高性的服务.你可以使用[token bucket algorithm](http://en.wikipedia.org/wiki/Token_bucket)技术量化请求限制.
+客户端的访问速度限制可以维护服务器的良好状态，保证为其他客户端请求提供高性的服务。你可以使用[token bucket algorithm](http://en.wikipedia.org/wiki/Token_bucket)技术量化请求限制。
 
 为每一个带有`RateLimit-Remaining`响应头的请求，返回预留的请求tokens。
 
-### 指定可接受头信息的版本
+#### 保证响应JSON最小化
 
-在开始的时候指定API版本，使用`Accepts`头传递版本信息,也可以是一个自定义的内容, 例如:
-
-```
-Accept: application/vnd.heroku+json; version=3
-```
-
-最好不要给出一个默认的版本, 而是要求客户端明确指明他们要使用特定的版本.
-
-### 减少路径嵌套
-
-在一些有父路径/子路径嵌套关系的资源数据模块中, 路径可能有非常深的嵌套关系, 例如:
+请求中多余的空格会增加响应大小，而且现在很多的HTTP客户端都会自己输出可读格式（"prettify"）的JSON。所以最好保证响应JSON最小化，例如：
 
 ```
-/orgs/{org_id}/apps/{app_id}/dynos/{dyno_id}
+{"beta":false,"email":"alice@heroku.com","id":"01234567-89ab-cdef-0123-456789abcdef","last_login":"2012-01-01T12:00:00Z","created_at":"2012-01-01T12:00:00Z","updated_at":"2012-01-01T12:00:00Z"}
 ```
 
-推荐在根(root)路径下指定资源来限制路径的嵌套深度。使用嵌套指定范围的资源，例如在下面的情况下，dyno属性app范围下，app属性org范围下:
+而不是这样：
 
 ```
-/orgs/{org_id}
-/orgs/{org_id}/apps
-/apps/{app_id}
-/apps/{app_id}/dynos
-/dynos/{dyno_id}
+{
+  "beta": false,
+  "email": "alice@heroku.com",
+  "id": "01234567-89ab-cdef-0123-456789abcdef",
+  "last_login": "2012-01-01T12:00:00Z",
+  "created_at": "2012-01-01T12:00:00Z",
+  "updated_at": "2012-01-01T12:00:00Z"
+}
 ```
+
+你可以提供可选的方式为客户端提供更详细可读的响应，使用查询参数（例如：`?pretty=true`）或者通过`Accept`头信息参数（例如：`Accept: application/vnd.heroku+json; version=3; indent=4;`）。
+
 
 ### 提供机器可读的JSON概要
 
@@ -359,5 +407,3 @@ $ curl -is https://$TOKEN@service.com/users
 ### 译者注
 - 更新时间：`2014-06-11`
 - 此为本人第一篇翻译文档，翻译不好的地方，还望读者见谅.
-- 如果您觉得此文档对您帮助非常大，可以慰劳一下译者，[支付宝](http://blog.cocoajin.org/pay.html)
-
