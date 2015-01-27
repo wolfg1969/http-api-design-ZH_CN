@@ -247,8 +247,6 @@ $ curl https://service.com/apps/www-prod
 "finished_at": "2012-01-01T12:00:00Z"
 ```
 
-```
-
 #### 嵌套外键关系
 
 使用嵌套对象序列化外键关联，例如.:
