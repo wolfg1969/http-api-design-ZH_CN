@@ -109,7 +109,7 @@ Accept: application/vnd.heroku+json; version=3
 请求, 例如:
 
 
-```
+```json
 $ curl -X DELETE \  
   https://service.com/apps/1f9b/domains/0fd4
 
@@ -187,7 +187,7 @@ service-api.com/app-setups
 
 属性同样也要用小写字母, 但是属性名字要用下划线`_`分割，因为这样在JavaScript语言中不用输入引号。 例如：
 
-```
+```json
 service_class: "first"
 ```
 
@@ -228,7 +228,7 @@ $ curl https://service.com/apps/www-prod
 
 生成小写的UUID格式 `8-4-4-4-12`，例如：
 
-```
+```json
 "id": "01234567-89ab-cdef-0123-456789abcdef"
 ```
 
@@ -236,7 +236,7 @@ $ curl https://service.com/apps/www-prod
 
 为资源提供默认的创建时间 `created_at` 和更新时间 `updated_at`，例如:
 
-```
+```json
 {
   ...
   "created_at": "2012-01-01T12:00:00Z",
@@ -251,7 +251,7 @@ $ curl https://service.com/apps/www-prod
 
 在接收和返回时都只使用UTC格式。ISO8601格式的数据，例如:
 
-```
+```json
 "finished_at": "2012-01-01T12:00:00Z"
 ```
 
@@ -259,7 +259,7 @@ $ curl https://service.com/apps/www-prod
 
 使用嵌套对象序列化外键关联，例如.:
 
-```
+```json
 {
   "name": "service-production",
   "owner": {
@@ -271,7 +271,7 @@ $ curl https://service.com/apps/www-prod
   
 而不是像这样:
 
-```
+```json
 {
   "name": "service-production",
   "owner_id": "5d8201b0...",
@@ -281,7 +281,7 @@ $ curl https://service.com/apps/www-prod
 
 这种方式尽可能的把相关联的资源信息内联在一起，而不用改变资源的结构，或者引入更多的字段 例如:
 
-```
+```json
 {
   "name": "service-production",
   "owner": {
@@ -301,7 +301,7 @@ $ curl https://service.com/apps/www-prod
 HTTP/1.1 429 Too Many Requests
 ```
 
-```
+```json
 {
   "id":      "rate_limit",
   "message": "Account reached its API rate limit.",
@@ -321,13 +321,13 @@ HTTP/1.1 429 Too Many Requests
 
 请求中多余的空格会增加响应大小，而且现在很多的HTTP客户端都会自己输出可读格式（"prettify"）的JSON。所以最好保证响应JSON最小化，例如：
 
-```
+```json
 {"beta":false,"email":"alice@heroku.com","id":"01234567-89ab-cdef-0123-456789abcdef","last_login":"2012-01-01T12:00:00Z","created_at":"2012-01-01T12:00:00Z","updated_at":"2012-01-01T12:00:00Z"}
 ```
 
 而不是这样：
 
-```
+```json
 {
   "beta": false,
   "email": "alice@heroku.com",
@@ -387,3 +387,5 @@ $ curl -is https://$TOKEN@service.com/users
 - 此为本人第一篇翻译文档，翻译不好的地方，还望读者见谅。
 - 欢迎大家共同的维护这个文档
 - HTML和PDF通过`Mou`生成
+
+
