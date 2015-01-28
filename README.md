@@ -13,6 +13,37 @@
 
 我们欢迎你为这篇指南做[贡献](https://github.com/interagent/http-api-design/blob/master/CONTRIBUTING.md)。
 
+## 目录
+
+* 基础
+  * 要求 TLS
+  * 指定可接受头信息的版本
+  * 支持Etags缓存
+  * 使用请求ID（Request-Ids）追踪请求
+  * 按范围分页
+* 请求（Requests）
+  * 返回合适的状态码
+  * 提供全部可用的资源
+  * 在请求的body体使用JSON格式数据
+  * 使用统一的资源路径格式
+  * 路径和属性要小写
+  * 支持方便的无id间接引用
+  * 最小化路径嵌套
+* 响应（Responses）
+  * 提供资源的(UU)ID
+  * 提供标准的时间戳
+  * 使用UTC（世界标准时间）时间，用ISO8601进行格式化
+  * 嵌套外键关系
+  * 生成结构化的错误
+  * 显示频率限制状态
+  * 保证响应JSON最小化
+* 工件（Artifacts）
+  * 提供机器可读的JSON模式
+  * 提供人类可读的文档
+  * 提供可执行的例子
+  * 描述稳定性
+* 译者注
+
 
 ### 基础
 
@@ -309,7 +340,7 @@ HTTP/1.1 429 Too Many Requests
 
 你可以提供可选的方式为客户端提供更详细可读的响应，使用查询参数（例如：`?pretty=true`）或者通过`Accept`头信息参数（例如：`Accept: application/vnd.heroku+json; version=3; indent=4;`）。
 
-###工件（Artifacts）<!--这个不知道怎么翻译了 T_T-->
+###工件（Artifacts）
 
 
 #### 提供机器可读的JSON模式
