@@ -386,3 +386,4 @@ $ curl -is https://$TOKEN@service.com/users
 - 更新时间：`2015-01-28`
 - 此为本人第一篇翻译文档，翻译不好的地方，还望读者见谅。
 - 欢迎大家共同的维护这个文档
+- HTML和PDF通过`Mou`生成
