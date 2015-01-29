@@ -1,6 +1,12 @@
 # HTTP API 设计指南
 > 翻译自 `HTTP API Design Guide` [https://github.com/interagent/http-api-design](https://github.com/interagent/http-api-design)
 
+- Bohan（bohanzhang#foxmail.com）
+- 更新时间：`2015-01-29`
+- 此为本人第一篇翻译文档
+- 欢迎大家问题和共同维护这个文档
+- HTML和PDF通过`Mou`生成
+
 ## 前言
 
 这篇指南介绍了大量的 HTTP+JSON 的api设计风格，最初摘录自heroku平台的api设计指引 [Heroku 平台 API 指引](https://devcenter.heroku.com/articles/platform-api-reference)。
@@ -20,7 +26,7 @@
   * 要求接收头信息中指定版本号
   * 支持Etag缓存
   * 为内省而提供 Request-Id
-  * 按范围分页
+  * 通过请求中的范围（Range）拆分大的响应
 * 请求（Requests）
   * 返回合适的状态码
   * 提供全部可用的资源
@@ -46,6 +52,11 @@
 
 
 ### 基础
+
+#### 隔离关注点
+设计时通过将请求和响应之间的不同部分隔离来让事情变得简单。保持简单的规则让我们能更关注在一些更大的更困难的问题上。
+
+请求和响应将解决一个特定的资源或集合。使用路径（path）来表明身份，body来传输内容（content）还有头信息（header）来传递元数据（metadata）。查询参数同样可以用来传递头信息的内容，但头信息是首选，因为他们更灵活、更能传达不同的信息。
 
 #### 要求安全连接（Secure Connections）
 
@@ -77,11 +88,9 @@ Accept: application/vnd.heroku+json; version=3
 
 为每一个请求响应包含一个`Request-Id`字段，并使用UUID作为该值。通过在客户端、服务器或任何支持服务上记录该值，它能主我们提供一种机制来跟踪、诊断和调试请求。
 
-#### 按范围分页
+#### 通过请求中的范围（Range）拆分大的响应
 
-对于服务器响应的大量数据我们应该为此分页。
-使用`Content-Range` 头传递分页请求。这里有个例子详细的说明了请求和响应头、状态码，限制条件、排序以及分页处理：[Heroku Platform API on Ranges](https://devcenter.heroku.com/articles/platform-api-reference#ranges).
-
+一个大的响应应该通过多个请求使用`Range`头信息来拆分，并指定如何取得。详细的请求和响应的头信息（header），状态码(status code)，范围(limit)，排序(ordering)和迭代(iteration)等，参考[Heroku Platform API discussion of Ranges](https://devcenter.heroku.com/articles/platform-api-reference#ranges).
 
 ###请求（Requests）
 
@@ -384,12 +393,5 @@ $ curl -is https://$TOKEN@service.com/users
 更多关于可能的稳定性和改变管理的方式，查看 [Heroku API compatibility policy](https://devcenter.heroku.com/articles/api-compatibility-policy)
 
 一旦你的API宣布产品正式版本及稳定版本时, 不要在当前API版本中做一些不兼容的改变。如果你需要，请创建一个新的版本的API。
-
-### 译者注
-- Bohan（bohanzhang#foxmail.com）
-- 更新时间：`2015-01-28`
-- 此为本人第一篇翻译文档，翻译不好的地方，还望读者见谅。
-- 欢迎大家共同的维护这个文档
-- HTML和PDF通过`Mou`生成
 
 
