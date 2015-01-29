@@ -11,7 +11,7 @@
 
 这篇指南介绍了大量的 HTTP+JSON 的api设计风格，最初摘录自heroku平台的api设计指引 [Heroku 平台 API 指引](https://devcenter.heroku.com/articles/platform-api-reference)。
 
-这篇指南除了介绍那些API，同时也适用于heroku平台新集成的API,我们希望那些在Heroku之外的API设计者也感兴趣。
+这篇指南除了介绍那些API，同时也适用于heroku平台新集成的API，我们希望那些在Heroku之外的API设计者也感兴趣。
 
 我们的目标是一致性，专注业务逻辑同时避免设计上的空想。我们一直在寻找一种良好的、统一的、显而易见的API设计方式，未必只有一种方式。
 
@@ -22,8 +22,8 @@
 ## 目录
 
 * 基础
-  * 强制使用 TLS
-  * 强制头信息中"Accept"段提供版本号信息
+  * 强制使用安全连接（Secure Connections）
+  * 强制头信息 Accept 中提供版本号
   * 支持Etag缓存
   * 为内省而提供 Request-Id
   * 通过请求中的范围（Range）拆分大的响应
@@ -66,11 +66,11 @@
 
 重定向是不推荐的，因为他们允许不好的客户端的行为，不提供任何明确的目标。客户依赖重定会加倍服务器流量和渲染 TLS 也没有作用，因为敏感数据已经无用在第一次调用已经暴露。
  
-#### 强制头信息中"Accept"段提供版本号信息
+#### 强制头信息 Accept 中提供版本号
 
 版本和版本之间的过渡对于设计和操作API是一个非常大的挑战。这样，最好是开始时就有一些机制来缓和这个过渡。
 
-为了防止意外,打破更改用户，最好是与所有请求都需要指定一个版本。为了将来的修改，最好不要提供默认的版本。
+为了防止意外，打破更改用户，最好是与所有请求都需要指定一个版本。为了将来的修改，最好不要提供默认的版本。
 
 最好是在头信息中指定版本号，和其它数据一起，通过`Accepts`自定义内容类型(content type)同时传递，例如:
 
@@ -96,12 +96,12 @@ Accept: application/vnd.heroku+json; version=3
 
 #### 返回合适的状态码
 
-为每一次的响应返回合适的HTTP状态码. 好的响应应该使用如下的状态码:
+为每一次的响应返回合适的HTTP状态码。 好的响应应该使用如下的状态码:
 
-* `200`: `GET`请求成功, 及`DELETE`或`PATCH`同步请求完成，或者`PUT`同步更新一个已存在的资源
+* `200`: `GET`请求成功，及`DELETE`或`PATCH`同步请求完成，或者`PUT`同步更新一个已存在的资源
 * `201`: `POST` 同步请求完成，或者`PUT`同步创建一个新的资源
-* `202`: `POST`, `PUT`, `DELETE`, 或 `PATCH` 请求接收，将被异步处理
-* `206`: `GET` 请求成功, 但是只返回一部分，参考：[上文中范围分页](#按范围分页)
+* `202`: `POST`，`PUT`，`DELETE`，或`PATCH`请求接收，将被异步处理
+* `206`: `GET` 请求成功，但是只返回一部分，参考：[上文中范围分页](#按范围分页)
 
 使用身份认证（authentication）和授权（authorization）错误码时需要注意：
 
@@ -118,8 +118,8 @@ Accept: application/vnd.heroku+json; version=3
 
 #### 提供全部可用的资源
 
-提供全部可显现的资源 (例如. 这个对象的所有属性) ，当响应码为200或是201时返回所有可用资源, 包含 `PUT`/`PATCH` 和 `DELETE`
-请求, 例如:
+提供全部可显现的资源 (例如： 这个对象的所有属性) ，当响应码为200或是201时返回所有可用资源，包含 `PUT`/`PATCH` 和 `DELETE`
+请求，例如:
 
 
 ```json
@@ -151,7 +151,7 @@ Content-Type: application/json;charset=utf-8
 
 #### 在请求的body体使用JSON格式数据
 
-在 `PUT`/`PATCH`/`POST` 请求的正文（request bodies）中使用JSON格式数据，而不是使用 form 表单形式的数据。这与我们使用JSON格式返回请求相对应, 例如.:
+在 `PUT`/`PATCH`/`POST` 请求的正文（request bodies）中使用JSON格式数据，而不是使用 form 表单形式的数据。这与我们使用JSON格式返回请求相对应，例如:
 
 ```
 $ curl -X POST https://service.com/apps \
@@ -198,7 +198,7 @@ service-api.com/users
 service-api.com/app-setups
 ```
 
-属性同样也要用小写字母, 但是属性名字要用下划线`_`分割，因为这样在JavaScript语言中不用输入引号。 例如：
+属性同样也要用小写字母，但是属性名字要用下划线`_`分割，因为这样在JavaScript语言中不用输入引号。 例如：
 
 ```json
 service_class: "first"
@@ -217,7 +217,7 @@ $ curl https://service.com/apps/www-prod
 
 #### 最小化路径嵌套
 
-在一些有父路径/子路径嵌套关系的资源数据模块中, 路径可能有非常深的嵌套关系, 例如:
+在一些有父路径/子路径嵌套关系的资源数据模块中，路径可能有非常深的嵌套关系，例如:
 
 ```
 /orgs/{org_id}/apps/{app_id}/dynos/{dyno_id}
@@ -270,7 +270,7 @@ $ curl https://service.com/apps/www-prod
 
 #### 嵌套外键关系
 
-使用嵌套对象序列化外键关联，例如.:
+使用嵌套对象序列化外键关联，例如:
 
 ```json
 {
@@ -308,7 +308,7 @@ $ curl https://service.com/apps/www-prod
 
 #### 生成结构化的错误
 
-响应错误的时，生成统一的、结构化的错误信息。包含一个机器可读的错误 `id`，一个人类能识别的错误信息（`message`）, 根据情况可以添加一个`url`来告诉客户端关于这个错误的更多信息以及如何去解决它，例如:
+响应错误的时，生成统一的、结构化的错误信息。包含一个机器可读的错误 `id`，一个人类能识别的错误信息（`message`），根据情况可以添加一个`url`来告诉客户端关于这个错误的更多信息以及如何去解决它，例如:
 
 ```
 HTTP/1.1 429 Too Many Requests
@@ -358,8 +358,8 @@ HTTP/1.1 429 Too Many Requests
 
 #### 提供机器可读的JSON模式
 
-提供一个机器可读的模式来恰当的表现你的API.使用
-[prmd](https://github.com/interagent/prmd)管理你的模式, 并且确保用`prmd verify`验证是有效的。
+提供一个机器可读的模式来恰当的表现你的API。使用
+[prmd](https://github.com/interagent/prmd)管理你的模式，并且确保用`prmd verify`验证是有效的。
 
 #### 提供人类可读的文档
 
@@ -384,7 +384,7 @@ $ export TOKEN=... # acquire from dashboard
 $ curl -is https://$TOKEN@service.com/users
 ```
 
-如果你使用[prmd](https://github.com/interagent/prmd)生成Markdown文档, 每个节点都会自动获取一些示例。
+如果你使用[prmd](https://github.com/interagent/prmd)生成Markdown文档，每个节点都会自动获取一些示例。
 
 #### 描述稳定性
 
@@ -392,6 +392,6 @@ $ curl -is https://$TOKEN@service.com/users
 
 更多关于可能的稳定性和改变管理的方式，查看 [Heroku API compatibility policy](https://devcenter.heroku.com/articles/api-compatibility-policy)
 
-一旦你的API宣布产品正式版本及稳定版本时, 不要在当前API版本中做一些不兼容的改变。如果你需要，请创建一个新的版本的API。
+一旦你的API宣布产品正式版本及稳定版本时，不要在当前API版本中做一些不兼容的改变。如果你需要，请创建一个新的版本的API。
 
 
