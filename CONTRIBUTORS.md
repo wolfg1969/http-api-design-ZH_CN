@@ -10,5 +10,4 @@
 ##翻译
 * cocoajin
 * ZhangBohan <bohanzhang@foxmail.com>
-* soloradish
-
+* soloradish <soloradish@gmail.com>
