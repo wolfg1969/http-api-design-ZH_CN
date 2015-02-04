@@ -1,11 +1,10 @@
 # HTTP API 设计指南
 > 翻译自 `HTTP API Design Guide` [https://github.com/interagent/http-api-design](https://github.com/interagent/http-api-design)
 
-- Bohan（bohanzhang#foxmail.com）
-- 更新时间：`2015-01-29`
-- 此为本人第一篇翻译文档
+- 更新时间：`2015-02-04`
 - 欢迎大家问题和共同维护这个文档
 - HTML和PDF通过`Mou`生成
+- 翻译人员见`CONTRIBUTORS.md`
 
 ## 前言
 
