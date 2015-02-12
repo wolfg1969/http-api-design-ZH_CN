@@ -8,13 +8,13 @@
 
 ## 前言
 
-这篇指南介绍了大量的 HTTP+JSON 的api设计风格，最初摘录自heroku平台的api设计指引 [Heroku 平台 API 指引](https://devcenter.heroku.com/articles/platform-api-reference)。
+这篇指南介绍描述了 HTTP+JSON API 的一种设计模式，最初摘录整理自 Heroku 平台的 API 设计指引 [Heroku 平台 API 指引](https://devcenter.heroku.com/articles/platform-api-reference)。
 
-这篇指南除了介绍那些API，同时也适用于heroku平台新集成的API，我们希望那些在Heroku之外的API设计者也感兴趣。
+这篇指南除了详细介绍现有的 API 外，Heroku 将来新加入的内部 API 也会符合这种设计模式，我们希望非 Heroku 员工的API设计者也能感兴趣。
 
-我们的目标是一致性，专注业务逻辑同时避免设计上的空想。我们一直在寻找一种良好的、统一的、显而易见的API设计方式，未必只有一种方式。
+我们的目标是保持一致性，专注业务逻辑同时避免过度设计。我们一直试图找出一种良好的、一致的、显而易见的 API 设计方法，而并不是所谓的"最终/理想模式"。
 
-我们假设你熟悉基本的 HTTP+JSON API 设计方式，但是，不一定包含在此篇指南里面的所有内容。
+我们假设你熟悉基本的 HTTP+JSON API 设计方法，所以本篇指南并不包含所有的 API 设计基础。
 
 我们欢迎你为这篇指南做[贡献](https://github.com/interagent/http-api-design/blob/master/CONTRIBUTING.md)。
 
