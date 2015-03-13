@@ -174,9 +174,9 @@ $ curl -X POST https://service.com/apps \
 
 使用复数形式为资源命名，除非这个资源在系统中是单例的 (例如，在大多数系统中，给定的用户帐户只有一个)。 这种方式保持了特定资源的统一性。
 
-##### 形为（Actions）
+##### 行为（Actions）
 
-好的末尾展现形式不许要为某个资源指定特殊的形为，在某些特殊情况下，指定特殊的资源的形为是必须的，为了清楚的描述，用一个标准的`actions`前缀去放置他们:
+好的末尾不需要为资源指定特殊的行为，但在特殊情况下，为某些资源指定行为却是必要的。为了描述清楚，在行为前加上一个标准的`actions`：
 
 ```
 /resources/:resource/actions/:action
@@ -190,14 +190,14 @@ $ curl -X POST https://service.com/apps \
 
 #### 路径和属性要小写
 
-为了和域名命名规则保持一致，使用小写字母和`-`分割路径名字，例如:
+为了和域名命名规则保持一致，使用小写字母并用`-`分割路径名字，例如：
 
 ```
 service-api.com/users
 service-api.com/app-setups
 ```
 
-属性同样也要用小写字母，但是属性名字要用下划线`_`分割，因为这样在JavaScript语言中不用输入引号。 例如：
+属性也使用小写字母，但是属性名要用下划线`_`分割，以便在Javascript中省略引号。 例如：
 
 ```json
 service_class: "first"
@@ -222,7 +222,7 @@ $ curl https://service.com/apps/www-prod
 /orgs/{org_id}/apps/{app_id}/dynos/{dyno_id}
 ```
 
-推荐在根(root)路径下指定资源来限制路径的嵌套深度。使用嵌套指定范围的资源。例如在上面的情况下，dyno属于app，app属于org可以表示为:
+推荐在根(root)路径下指定资源来限制路径的嵌套深度。使用嵌套指定范围的资源。在上述例子中，dyno属于app，app属于org可以表示为：
 
 ```
 /orgs/{org_id}
@@ -291,7 +291,7 @@ $ curl https://service.com/apps/www-prod
 }
 ```
 
-这种方式尽可能的把相关联的资源信息内联在一起，而不用改变资源的结构，或者引入更多的字段 例如:
+这种方式尽可能的把相关联的资源信息内联在一起，而不用改变资源的结构，或者引入更多的字段，例如:
 
 ```json
 {
