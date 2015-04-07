@@ -71,7 +71,7 @@
 
 为了避免API的变动导致用户使用中产生意外结果或调用失败，最好强制要求所有访问都需要指定版本号。请避免提供默认版本号，一旦提供，日后想要修改它会相当困难。
 
-最适合放置版本号的位置是头信息(HTTP Headers)，在`Accepts`段中使用自定义类型(content type)与其他元数据(metadata)一起提交。例如:
+最适合放置版本号的位置是头信息(HTTP Headers)，在 `Accept` 段中使用自定义类型(content type)与其他元数据(metadata)一起提交。例如:
 
 ```
 Accept: application/vnd.heroku+json; version=3
@@ -120,7 +120,7 @@ Accept: application/vnd.heroku+json; version=3
 
 
 ```json
-$ curl -X DELETE \  
+$ curl -X DELETE \
   https://service.com/apps/1f9b/domains/0fd4
 
 HTTP/1.1 200 OK
@@ -137,7 +137,7 @@ Content-Type: application/json;charset=utf-8
 当请求状态码为202时，不返回所有可用资源，例如：
 
 ```
-$ curl -X DELETE \  
+$ curl -X DELETE \
   https://service.com/apps/1f9b/dynos/05bd
 
 HTTP/1.1 202 Accepted
