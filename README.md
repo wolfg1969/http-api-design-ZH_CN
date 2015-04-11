@@ -1,7 +1,7 @@
 # HTTP API 设计指南
 > 翻译自 `HTTP API Design Guide` [https://github.com/interagent/http-api-design](https://github.com/interagent/http-api-design)
 
-- 更新时间：`2015-02-04`
+- 更新时间：`2015-02-04` 更新至 [#2a74f45](https://github.com/interagent/http-api-design/commit/2a74f45b9afaf6c951352f36c3a4e1b0418ed10b)
 - 欢迎大家问题和共同维护这个文档
 - HTML和PDF通过`Mou`生成
 - 翻译人员见`CONTRIBUTORS.md`
