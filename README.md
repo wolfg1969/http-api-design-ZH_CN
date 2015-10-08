@@ -27,14 +27,14 @@
   * 为内省而提供 Request-Id
   * 通过请求中的范围（Range）拆分大的响应
 * 请求（Requests）
-  * 返回合适的状态码
-  * 提供全部可用的资源
   * 在请求的body体使用JSON格式数据
   * 使用统一的资源路径格式
   * 路径和属性要小写
   * 支持方便的无id间接引用
   * 最小化路径嵌套
 * 响应（Responses）
+  * 返回合适的状态码
+  * 提供全部可用的资源
   * 提供资源的(UU)ID
   * 提供标准的时间戳
   * 使用UTC（世界标准时间）时间，用ISO8601进行格式化
@@ -90,61 +90,6 @@ Accept: application/vnd.heroku+json; version=3
 一个大的响应应该通过多个请求使用`Range`头信息来拆分，并指定如何取得。详细的请求和响应的头信息（header），状态码(status code)，范围(limit)，排序(ordering)和迭代(iteration)等，参考[Heroku Platform API discussion of Ranges](https://devcenter.heroku.com/articles/platform-api-reference#ranges).
 
 ###请求（Requests）
-
-#### 返回合适的状态码
-
-为每一次的响应返回合适的HTTP状态码。 好的响应应该使用如下的状态码:
-
-* `200`: `GET`请求成功，及`DELETE`或`PATCH`同步请求完成，或者`PUT`同步更新一个已存在的资源
-* `201`: `POST` 同步请求完成，或者`PUT`同步创建一个新的资源
-* `202`: `POST`，`PUT`，`DELETE`，或`PATCH`请求接收，将被异步处理
-* `206`: `GET` 请求成功，但是只返回一部分，参考：[上文中范围分页](#按范围分页)
-
-使用身份认证（authentication）和授权（authorization）错误码时需要注意：
-
-* `401 Unauthorized`: 用户未认证，请求失败
-* `403 Forbidden`: 用户无权限访问该资源，请求失败
-
-当用户请求错误时，提供合适的状态码可以提供额外的信息：
-
-* `422 Unprocessable Entity`: 请求被服务器正确解析，但是包含无效字段
-* `429 Too Many Requests`: 因为访问频繁，你已经被限制访问，稍后重试
-* `500 Internal Server Error`: 服务器错误，确认状态并报告问题
-
-对于用户错误和服务器错误情况状态码，参考：  [HTTP response code spec](https://tools.ietf.org/html/rfc7231#section-6)
-
-#### 提供全部可用的资源
-
-提供全部可显现的资源 (例如： 这个对象的所有属性) ，当响应码为200或是201时返回所有可用资源，包含 `PUT`/`PATCH` 和 `DELETE`
-请求，例如:
-
-
-```json
-$ curl -X DELETE \
-  https://service.com/apps/1f9b/domains/0fd4
-
-HTTP/1.1 200 OK
-Content-Type: application/json;charset=utf-8
-...
-{
-  "created_at": "2012-01-01T12:00:00Z",
-  "hostname": "subdomain.example.com",
-  "id": "01234567-89ab-cdef-0123-456789abcdef",
-  "updated_at": "2012-01-01T12:00:00Z"
-}
-```
-
-当请求状态码为202时，不返回所有可用资源，例如：
-
-```
-$ curl -X DELETE \
-  https://service.com/apps/1f9b/dynos/05bd
-
-HTTP/1.1 202 Accepted
-Content-Type: application/json;charset=utf-8
-...
-{}
-```
 
 #### 在请求的body体使用JSON格式数据
 
@@ -231,6 +176,61 @@ $ curl https://service.com/apps/www-prod
 ```
 
 ### 响应（Responses）
+
+#### 返回合适的状态码
+
+为每一次的响应返回合适的HTTP状态码。 好的响应应该使用如下的状态码:
+
+* `200`: `GET`请求成功，及`DELETE`或`PATCH`同步请求完成，或者`PUT`同步更新一个已存在的资源
+* `201`: `POST` 同步请求完成，或者`PUT`同步创建一个新的资源
+* `202`: `POST`，`PUT`，`DELETE`，或`PATCH`请求接收，将被异步处理
+* `206`: `GET` 请求成功，但是只返回一部分，参考：[上文中范围分页](#按范围分页)
+
+使用身份认证（authentication）和授权（authorization）错误码时需要注意：
+
+* `401 Unauthorized`: 用户未认证，请求失败
+* `403 Forbidden`: 用户无权限访问该资源，请求失败
+
+当用户请求错误时，提供合适的状态码可以提供额外的信息：
+
+* `422 Unprocessable Entity`: 请求被服务器正确解析，但是包含无效字段
+* `429 Too Many Requests`: 因为访问频繁，你已经被限制访问，稍后重试
+* `500 Internal Server Error`: 服务器错误，确认状态并报告问题
+
+对于用户错误和服务器错误情况状态码，参考：  [HTTP response code spec](https://tools.ietf.org/html/rfc7231#section-6)
+
+#### 提供全部可用的资源
+
+提供全部可显现的资源 (例如： 这个对象的所有属性) ，当响应码为200或是201时返回所有可用资源，包含 `PUT`/`PATCH` 和 `DELETE`
+请求，例如:
+
+
+```json
+$ curl -X DELETE \  
+  https://service.com/apps/1f9b/domains/0fd4
+
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=utf-8
+...
+{
+  "created_at": "2012-01-01T12:00:00Z",
+  "hostname": "subdomain.example.com",
+  "id": "01234567-89ab-cdef-0123-456789abcdef",
+  "updated_at": "2012-01-01T12:00:00Z"
+}
+```
+
+当请求状态码为202时，不返回所有可用资源，例如：
+
+```
+$ curl -X DELETE \  
+  https://service.com/apps/1f9b/dynos/05bd
+
+HTTP/1.1 202 Accepted
+Content-Type: application/json;charset=utf-8
+...
+{}
+```
 
 #### 提供资源的(UU)ID
 
