@@ -2,308 +2,307 @@
 
 <head>
 <meta charset="utf-8">
-<title>README</title>
-<style  type="text/css">
-body {
-  font-family: Helvetica, arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: white;
-  padding: 30px; }
-
-body > *:first-child {
-  margin-top: 0 !important; }
-body > *:last-child {
-  margin-bottom: 0 !important; }
-
-a {
-  color: #4183C4; }
-a.absent {
-  color: #cc0000; }
-a.anchor {
-  display: block;
-  padding-left: 30px;
-  margin-left: -30px;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0; }
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 20px 0 10px;
-  padding: 0;
-  font-weight: bold;
-  -webkit-font-smoothing: antialiased;
-  cursor: text;
-  position: relative; }
-
-h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
-  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
-  text-decoration: none; }
-
-h1 tt, h1 code {
-  font-size: inherit; }
-
-h2 tt, h2 code {
-  font-size: inherit; }
-
-h3 tt, h3 code {
-  font-size: inherit; }
-
-h4 tt, h4 code {
-  font-size: inherit; }
-
-h5 tt, h5 code {
-  font-size: inherit; }
-
-h6 tt, h6 code {
-  font-size: inherit; }
-
-h1 {
-  font-size: 28px;
-  color: black; }
-
-h2 {
-  font-size: 24px;
-  border-bottom: 1px solid #cccccc;
-  color: black; }
-
-h3 {
-  font-size: 18px; }
-
-h4 {
-  font-size: 16px; }
-
-h5 {
-  font-size: 14px; }
-
-h6 {
-  color: #777777;
-  font-size: 14px; }
-
-p, blockquote, ul, ol, dl, li, table, pre {
-  margin: 15px 0; }
-
-hr {
-  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
-  border: 0 none;
-  color: #cccccc;
-  height: 4px;
-  padding: 0;
-}
-
-body > h2:first-child {
-  margin-top: 0;
-  padding-top: 0; }
-body > h1:first-child {
-  margin-top: 0;
-  padding-top: 0; }
-  body > h1:first-child + h2 {
-    margin-top: 0;
-    padding-top: 0; }
-body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
-  margin-top: 0;
-  padding-top: 0; }
-
-a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
-  margin-top: 0;
-  padding-top: 0; }
-
-h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
-  margin-top: 0; }
-
-li p.first {
-  display: inline-block; }
-li {
-  margin: 0; }
-ul, ol {
-  padding-left: 30px; }
-
-ul :first-child, ol :first-child {
-  margin-top: 0; }
-
-dl {
-  padding: 0; }
-  dl dt {
-    font-size: 14px;
-    font-weight: bold;
-    font-style: italic;
-    padding: 0;
-    margin: 15px 0 5px; }
-    dl dt:first-child {
-      padding: 0; }
-    dl dt > :first-child {
-      margin-top: 0; }
-    dl dt > :last-child {
-      margin-bottom: 0; }
-  dl dd {
-    margin: 0 0 15px;
-    padding: 0 15px; }
-    dl dd > :first-child {
-      margin-top: 0; }
-    dl dd > :last-child {
-      margin-bottom: 0; }
-
-blockquote {
-  border-left: 4px solid #dddddd;
-  padding: 0 15px;
-  color: #777777; }
-  blockquote > :first-child {
-    margin-top: 0; }
-  blockquote > :last-child {
-    margin-bottom: 0; }
-
-table {
-  padding: 0;border-collapse: collapse; }
-  table tr {
-    border-top: 1px solid #cccccc;
-    background-color: white;
-    margin: 0;
-    padding: 0; }
-    table tr:nth-child(2n) {
-      background-color: #f8f8f8; }
-    table tr th {
-      font-weight: bold;
-      border: 1px solid #cccccc;
-      margin: 0;
-      padding: 6px 13px; }
-    table tr td {
-      border: 1px solid #cccccc;
-      margin: 0;
-      padding: 6px 13px; }
-    table tr th :first-child, table tr td :first-child {
-      margin-top: 0; }
-    table tr th :last-child, table tr td :last-child {
-      margin-bottom: 0; }
-
-img {
-  max-width: 100%; }
-
-span.frame {
-  display: block;
-  overflow: hidden; }
-  span.frame > span {
-    border: 1px solid #dddddd;
-    display: block;
-    float: left;
-    overflow: hidden;
-    margin: 13px 0 0;
-    padding: 7px;
-    width: auto; }
-  span.frame span img {
-    display: block;
-    float: left; }
-  span.frame span span {
-    clear: both;
-    color: #333333;
-    display: block;
-    padding: 5px 0 0; }
-span.align-center {
-  display: block;
-  overflow: hidden;
-  clear: both; }
-  span.align-center > span {
-    display: block;
-    overflow: hidden;
-    margin: 13px auto 0;
-    text-align: center; }
-  span.align-center span img {
-    margin: 0 auto;
-    text-align: center; }
-span.align-right {
-  display: block;
-  overflow: hidden;
-  clear: both; }
-  span.align-right > span {
-    display: block;
-    overflow: hidden;
-    margin: 13px 0 0;
-    text-align: right; }
-  span.align-right span img {
-    margin: 0;
-    text-align: right; }
-span.float-left {
-  display: block;
-  margin-right: 13px;
-  overflow: hidden;
-  float: left; }
-  span.float-left span {
-    margin: 13px 0 0; }
-span.float-right {
-  display: block;
-  margin-left: 13px;
-  overflow: hidden;
-  float: right; }
-  span.float-right > span {
-    display: block;
-    overflow: hidden;
-    margin: 13px auto 0;
-    text-align: right; }
-
-code, tt {
-  margin: 0 2px;
-  padding: 0 5px;
-  white-space: nowrap;
-  border: 1px solid #eaeaea;
-  background-color: #f8f8f8;
-  border-radius: 3px; }
-
-pre code {
-  margin: 0;
-  padding: 0;
-  white-space: pre;
-  border: none;
-  background: transparent; }
-
-.highlight pre {
-  background-color: #f8f8f8;
-  border: 1px solid #cccccc;
-  font-size: 13px;
-  line-height: 19px;
-  overflow: auto;
-  padding: 6px 10px;
-  border-radius: 3px; }
-
-pre {
-  background-color: #f8f8f8;
-  border: 1px solid #cccccc;
-  font-size: 13px;
-  line-height: 19px;
-  overflow: auto;
-  padding: 6px 10px;
-  border-radius: 3px; }
-  pre code, pre tt {
-    background-color: transparent;
-    border: none; }
-
-sup {
-    font-size: 0.83em;
-    vertical-align: super;
-    line-height: 0;
-}
-* {
-	-webkit-print-color-adjust: exact;
-}
-@media screen and (min-width: 914px) {
+<title></title>
+<style>
     body {
-        width: 854px;
-        margin:0 auto;
-    }
-}
-@media print {
-	table, pre {
-		page-break-inside: avoid;
-	}
-	pre {
-		word-wrap: break-word;
-	}
-}
-</style>
+      font-family: Helvetica, arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: white;
+      padding: 30px; }
 
-</head><body>
+    body > *:first-child {
+      margin-top: 0 !important; }
+    body > *:last-child {
+      margin-bottom: 0 !important; }
+
+    a {
+      color: #4183C4; }
+    a.absent {
+      color: #cc0000; }
+    a.anchor {
+      display: block;
+      padding-left: 30px;
+      margin-left: -30px;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0; }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 20px 0 10px;
+      padding: 0;
+      font-weight: bold;
+      -webkit-font-smoothing: antialiased;
+      cursor: text;
+      position: relative; }
+
+    h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+      text-decoration: none; }
+
+    h1 tt, h1 code {
+      font-size: inherit; }
+
+    h2 tt, h2 code {
+      font-size: inherit; }
+
+    h3 tt, h3 code {
+      font-size: inherit; }
+
+    h4 tt, h4 code {
+      font-size: inherit; }
+
+    h5 tt, h5 code {
+      font-size: inherit; }
+
+    h6 tt, h6 code {
+      font-size: inherit; }
+
+    h1 {
+      font-size: 28px;
+      color: black; }
+
+    h2 {
+      font-size: 24px;
+      border-bottom: 1px solid #cccccc;
+      color: black; }
+
+    h3 {
+      font-size: 18px; }
+
+    h4 {
+      font-size: 16px; }
+
+    h5 {
+      font-size: 14px; }
+
+    h6 {
+      color: #777777;
+      font-size: 14px; }
+
+    p, blockquote, ul, ol, dl, li, table, pre {
+      margin: 15px 0; }
+
+    hr {
+      background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+      border: 0 none;
+      color: #cccccc;
+      height: 4px;
+      padding: 0;
+    }
+
+    body > h2:first-child {
+      margin-top: 0;
+      padding-top: 0; }
+    body > h1:first-child {
+      margin-top: 0;
+      padding-top: 0; }
+      body > h1:first-child + h2 {
+        margin-top: 0;
+        padding-top: 0; }
+    body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+      margin-top: 0;
+      padding-top: 0; }
+
+    a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+      margin-top: 0;
+      padding-top: 0; }
+
+    h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+      margin-top: 0; }
+
+    li p.first {
+      display: inline-block; }
+    li {
+      margin: 0; }
+    ul, ol {
+      padding-left: 30px; }
+
+    ul :first-child, ol :first-child {
+      margin-top: 0; }
+
+    dl {
+      padding: 0; }
+      dl dt {
+        font-size: 14px;
+        font-weight: bold;
+        font-style: italic;
+        padding: 0;
+        margin: 15px 0 5px; }
+        dl dt:first-child {
+          padding: 0; }
+        dl dt > :first-child {
+          margin-top: 0; }
+        dl dt > :last-child {
+          margin-bottom: 0; }
+      dl dd {
+        margin: 0 0 15px;
+        padding: 0 15px; }
+        dl dd > :first-child {
+          margin-top: 0; }
+        dl dd > :last-child {
+          margin-bottom: 0; }
+
+    blockquote {
+      border-left: 4px solid #dddddd;
+      padding: 0 15px;
+      color: #777777; }
+      blockquote > :first-child {
+        margin-top: 0; }
+      blockquote > :last-child {
+        margin-bottom: 0; }
+
+    table {
+      padding: 0;border-collapse: collapse; }
+      table tr {
+        border-top: 1px solid #cccccc;
+        background-color: white;
+        margin: 0;
+        padding: 0; }
+        table tr:nth-child(2n) {
+          background-color: #f8f8f8; }
+        table tr th {
+          font-weight: bold;
+          border: 1px solid #cccccc;
+          margin: 0;
+          padding: 6px 13px; }
+        table tr td {
+          border: 1px solid #cccccc;
+          margin: 0;
+          padding: 6px 13px; }
+        table tr th :first-child, table tr td :first-child {
+          margin-top: 0; }
+        table tr th :last-child, table tr td :last-child {
+          margin-bottom: 0; }
+
+    img {
+      max-width: 100%; }
+
+    span.frame {
+      display: block;
+      overflow: hidden; }
+      span.frame > span {
+        border: 1px solid #dddddd;
+        display: block;
+        float: left;
+        overflow: hidden;
+        margin: 13px 0 0;
+        padding: 7px;
+        width: auto; }
+      span.frame span img {
+        display: block;
+        float: left; }
+      span.frame span span {
+        clear: both;
+        color: #333333;
+        display: block;
+        padding: 5px 0 0; }
+    span.align-center {
+      display: block;
+      overflow: hidden;
+      clear: both; }
+      span.align-center > span {
+        display: block;
+        overflow: hidden;
+        margin: 13px auto 0;
+        text-align: center; }
+      span.align-center span img {
+        margin: 0 auto;
+        text-align: center; }
+    span.align-right {
+      display: block;
+      overflow: hidden;
+      clear: both; }
+      span.align-right > span {
+        display: block;
+        overflow: hidden;
+        margin: 13px 0 0;
+        text-align: right; }
+      span.align-right span img {
+        margin: 0;
+        text-align: right; }
+    span.float-left {
+      display: block;
+      margin-right: 13px;
+      overflow: hidden;
+      float: left; }
+      span.float-left span {
+        margin: 13px 0 0; }
+    span.float-right {
+      display: block;
+      margin-left: 13px;
+      overflow: hidden;
+      float: right; }
+      span.float-right > span {
+        display: block;
+        overflow: hidden;
+        margin: 13px auto 0;
+        text-align: right; }
+
+    code, tt {
+      margin: 0 2px;
+      padding: 0 5px;
+      white-space: nowrap;
+      border: 1px solid #eaeaea;
+      background-color: #f8f8f8;
+      border-radius: 3px; }
+
+    pre code {
+      margin: 0;
+      padding: 0;
+      white-space: pre;
+      border: none;
+      background: transparent; }
+
+    .highlight pre {
+      background-color: #f8f8f8;
+      border: 1px solid #cccccc;
+      font-size: 13px;
+      line-height: 19px;
+      overflow: auto;
+      padding: 6px 10px;
+      border-radius: 3px; }
+
+    pre {
+      background-color: #f8f8f8;
+      border: 1px solid #cccccc;
+      font-size: 13px;
+      line-height: 19px;
+      overflow: auto;
+      padding: 6px 10px;
+      border-radius: 3px; }
+      pre code, pre tt {
+        background-color: transparent;
+        border: none; }
+
+    sup {
+        font-size: 0.83em;
+        vertical-align: super;
+        line-height: 0;
+    }
+    * {
+        -webkit-print-color-adjust: exact;
+    }
+    @media screen and (min-width: 914px) {
+        body {
+            width: 854px;
+            margin:0 auto;
+        }
+    }
+    @media print {
+        table, pre {
+            page-break-inside: avoid;
+        }
+        pre {
+            word-wrap: break-word;
+        }
+    }
+</style>
+<style> @media print{ {.hljs{overflow: visible; word-wrap: break-word;} }</style></head><body><div class="markdown-body">
 <h1>HTTP API 设计指南</h1>
 
 <blockquote>
@@ -311,21 +310,21 @@ sup {
 </blockquote>
 
 <ul>
-<li>更新时间：<code>2015-02-04</code></li>
+<li>更新时间：<code>2015-10-08</code> 更新至 <a href="https://github.com/interagent/http-api-design/commit/50bda693252a4f52653d638fd5503b39b88b8470">#50bda6</a></li>
 <li>欢迎大家问题和共同维护这个文档</li>
-<li>HTML和PDF通过<code>Mou</code>生成</li>
+<li>HTML和PDF通过<code>MWeb</code>生成</li>
 <li>翻译人员见<code>CONTRIBUTORS.md</code></li>
 </ul>
 
 <h2>前言</h2>
 
-<p>这篇指南介绍了大量的 HTTP+JSON 的api设计风格，最初摘录自heroku平台的api设计指引 <a href="https://devcenter.heroku.com/articles/platform-api-reference">Heroku 平台 API 指引</a>。</p>
+<p>这篇指南介绍描述了 HTTP+JSON API 的一种设计模式，最初摘录整理自 Heroku 平台的 API 设计指引 <a href="https://devcenter.heroku.com/articles/platform-api-reference">Heroku 平台 API 指引</a>。</p>
 
-<p>这篇指南除了介绍那些API，同时也适用于heroku平台新集成的API，我们希望那些在Heroku之外的API设计者也感兴趣。</p>
+<p>这篇指南除了详细介绍现有的 API 外，Heroku 将来新加入的内部 API 也会符合这种设计模式，我们希望非 Heroku 员工的API设计者也能感兴趣。</p>
 
-<p>我们的目标是一致性，专注业务逻辑同时避免设计上的空想。我们一直在寻找一种良好的、统一的、显而易见的API设计方式，未必只有一种方式。</p>
+<p>我们的目标是保持一致性，专注业务逻辑同时避免过度设计。我们一直试图找出一种良好的、一致的、显而易见的 API 设计方法，而并不是所谓的<q>最终/理想模式</q>。</p>
 
-<p>我们假设你熟悉基本的 HTTP+JSON API 设计方式，但是，不一定包含在此篇指南里面的所有内容。</p>
+<p>我们假设你熟悉基本的 HTTP+JSON API 设计方法，所以本篇指南并不包含所有的 API 设计基础。</p>
 
 <p>我们欢迎你为这篇指南做<a href="https://github.com/interagent/http-api-design/blob/master/CONTRIBUTING.md">贡献</a>。</p>
 
@@ -344,8 +343,6 @@ sup {
 <li>请求（Requests）
 
 <ul>
-<li>返回合适的状态码</li>
-<li>提供全部可用的资源</li>
 <li>在请求的body体使用JSON格式数据</li>
 <li>使用统一的资源路径格式</li>
 <li>路径和属性要小写</li>
@@ -355,6 +352,8 @@ sup {
 <li>响应（Responses）
 
 <ul>
+<li>返回合适的状态码</li>
+<li>提供全部可用的资源</li>
 <li>提供资源的(UU)ID</li>
 <li>提供标准的时间戳</li>
 <li>使用UTC（世界标准时间）时间，用ISO8601进行格式化</li>
@@ -396,18 +395,16 @@ sup {
 
 <p>为了避免API的变动导致用户使用中产生意外结果或调用失败，最好强制要求所有访问都需要指定版本号。请避免提供默认版本号，一旦提供，日后想要修改它会相当困难。</p>
 
-<p>最适合放置版本号的位置是头信息(HTTP Headers)，在<code>Accepts</code>段中使用自定义类型(content type)与其他元数据(metadata)一起提交。例如:</p>
+<p>最适合放置版本号的位置是头信息(HTTP Headers)，在 <code>Accept</code> 段中使用自定义类型(content type)与其他元数据(metadata)一起提交。例如:</p>
 
 <pre><code>Accept: application/vnd.heroku+json; version=3
 </code></pre>
 
 <h4>支持Etag缓存</h4>
 
-<p>在所有请求响应中包含一个<code>ETag</code>头，标识出返回资源的版本。这样就允许用户去缓存这些资源，请求时将<code>ETag</code>的值设置到<code>If-None-Match</code>头信息中就可以知道是否需要更新缓存了。</p>
+<p>在所有返回的响应中包含<code>ETag</code>头信息，用来标识资源的版本。这让用户对资源进行缓存处理成为可能，在后续的访问请求中把<code>If-None-Match</code>头信息设置为之前得到的<code>ETag</code>值，就可以侦测到已缓存的资源是否需要更新。</p>
 
 <h4>为内省而提供 Request-Id</h4>
-
-<p>为每一个请求响应包含一个<code>Request-Id</code>字段，使用UUID作为该值。如果服务器和客户端同时记录下这些内容，这样对于跟踪和调试请求非常有帮助。</p>
 
 <p>为每一个请求响应包含一个<code>Request-Id</code>字段，并使用UUID作为该值。通过在客户端、服务器或任何支持服务上记录该值，它能主我们提供一种机制来跟踪、诊断和调试请求。</p>
 
@@ -416,6 +413,85 @@ sup {
 <p>一个大的响应应该通过多个请求使用<code>Range</code>头信息来拆分，并指定如何取得。详细的请求和响应的头信息（header），状态码(status code)，范围(limit)，排序(ordering)和迭代(iteration)等，参考<a href="https://devcenter.heroku.com/articles/platform-api-reference#ranges">Heroku Platform API discussion of Ranges</a>.</p>
 
 <h3>请求（Requests）</h3>
+
+<h4>在请求的body体使用JSON格式数据</h4>
+
+<p>在 <code>PUT</code>/<code>PATCH</code>/<code>POST</code> 请求的正文（request bodies）中使用JSON格式数据，而不是使用 form 表单形式的数据。这与我们使用JSON格式返回请求相对应，例如:</p>
+
+<pre><code>$ curl -X POST https://service.com/apps \
+    -H &quot;Content-Type: application/json&quot; \
+    -d &#39;{&quot;name&quot;: &quot;demoapp&quot;}&#39;
+
+{
+  &quot;id&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
+  &quot;name&quot;: &quot;demoapp&quot;,
+  &quot;owner&quot;: {
+    &quot;email&quot;: &quot;username@example.com&quot;,
+    &quot;id&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;
+  },
+  ...
+}
+</code></pre>
+
+<h4>使用统一的资源路径格式</h4>
+
+<h5>资源名（Resource names）</h5>
+
+<p>使用复数形式为资源命名，除非这个资源在系统中是单例的 (例如，在大多数系统中，给定的用户帐户只有一个)。 这种方式保持了特定资源的统一性。</p>
+
+<h5>行为（Actions）</h5>
+
+<p>好的末尾不需要为资源指定特殊的行为，但在特殊情况下，为某些资源指定行为却是必要的。为了描述清楚，在行为前加上一个标准的<code>actions</code>：</p>
+
+<pre><code>/resources/:resource/actions/:action
+</code></pre>
+
+<p>例如：</p>
+
+<pre><code>/runs/{run_id}/actions/stop
+</code></pre>
+
+<h4>路径和属性要小写</h4>
+
+<p>为了和域名命名规则保持一致，使用小写字母并用<code>-</code>分割路径名字，例如：</p>
+
+<pre><code>service-api.com/users
+service-api.com/app-setups
+</code></pre>
+
+<p>属性也使用小写字母，但是属性名要用下划线<code>_</code>分割，以便在Javascript中省略引号。 例如：</p>
+
+<pre><code class="language-json">service_class: &quot;first&quot;
+</code></pre>
+
+<h4>支持方便的无id间接引用</h4>
+
+<p>在某些情况下，让用户提供ID去定位资源是不方便的。例如，一个用户想取得他在Heroku平台app信息，但是这个app的唯一标识是UUID。这种情况下，你应该支持接口通过名字和ID都能访问，例如:</p>
+
+<pre><code>$ curl https://service.com/apps/{app_id_or_name}
+$ curl https://service.com/apps/97addcf0-c182
+$ curl https://service.com/apps/www-prod
+</code></pre>
+
+<p>不要只接受使用名字而放弃了使用id。</p>
+
+<h4>最小化路径嵌套</h4>
+
+<p>在一些有父路径/子路径嵌套关系的资源数据模块中，路径可能有非常深的嵌套关系，例如:</p>
+
+<pre><code>/orgs/{org_id}/apps/{app_id}/dynos/{dyno_id}
+</code></pre>
+
+<p>推荐在根(root)路径下指定资源来限制路径的嵌套深度。使用嵌套指定范围的资源。在上述例子中，dyno属于app，app属于org可以表示为：</p>
+
+<pre><code>/orgs/{org_id}
+/orgs/{org_id}/apps
+/apps/{app_id}
+/apps/{app_id}/dynos
+/dynos/{dyno_id}
+</code></pre>
+
+<h3>响应（Responses）</h3>
 
 <h4>返回合适的状态码</h4>
 
@@ -447,10 +523,10 @@ sup {
 
 <h4>提供全部可用的资源</h4>
 
-<p>提供全部可显现的资源 (例如： 这个对象的所有属性) ，当响应码为200或是201时返回所有可用资源，包含 <code>PUT</code>/<code>PATCH</code> 和 <code>DELETE</code><br>
+<p>提供全部可显现的资源 (例如： 这个对象的所有属性) ，当响应码为200或是201时返回所有可用资源，包含 <code>PUT</code>/<code>PATCH</code> 和 <code>DELETE</code><br/>
 请求，例如:</p>
 
-<pre><code class="json">$ curl -X DELETE \  
+<pre><code class="language-json">$ curl -X DELETE \
   https://service.com/apps/1f9b/domains/0fd4
 
 HTTP/1.1 200 OK
@@ -466,7 +542,7 @@ Content-Type: application/json;charset=utf-8
 
 <p>当请求状态码为202时，不返回所有可用资源，例如：</p>
 
-<pre><code>$ curl -X DELETE \  
+<pre><code>$ curl -X DELETE \
   https://service.com/apps/1f9b/dynos/05bd
 
 HTTP/1.1 202 Accepted
@@ -475,99 +551,20 @@ Content-Type: application/json;charset=utf-8
 {}
 </code></pre>
 
-<h4>在请求的body体使用JSON格式数据</h4>
-
-<p>在 <code>PUT</code>/<code>PATCH</code>/<code>POST</code> 请求的正文（request bodies）中使用JSON格式数据，而不是使用 form 表单形式的数据。这与我们使用JSON格式返回请求相对应，例如:</p>
-
-<pre><code>$ curl -X POST https://service.com/apps \
-    -H &quot;Content-Type: application/json&quot; \
-    -d &#39;{&quot;name&quot;: &quot;demoapp&quot;}&#39;
-
-{
-  &quot;id&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
-  &quot;name&quot;: &quot;demoapp&quot;,
-  &quot;owner&quot;: {
-    &quot;email&quot;: &quot;username@example.com&quot;,
-    &quot;id&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;
-  },
-  ...
-}
-</code></pre>
-
-<h4>使用统一的资源路径格式</h4>
-
-<h5>资源名（Resource names）</h5>
-
-<p>使用复数形式为资源命名，除非这个资源在系统中是单例的 (例如，在大多数系统中，给定的用户帐户只有一个)。 这种方式保持了特定资源的统一性。</p>
-
-<h5>形为（Actions）</h5>
-
-<p>好的末尾展现形式不许要为某个资源指定特殊的形为，在某些特殊情况下，指定特殊的资源的形为是必须的，为了清楚的描述，用一个标准的<code>actions</code>前缀去放置他们:</p>
-
-<pre><code>/resources/:resource/actions/:action
-</code></pre>
-
-<p>例如：</p>
-
-<pre><code>/runs/{run_id}/actions/stop
-</code></pre>
-
-<h4>路径和属性要小写</h4>
-
-<p>为了和域名命名规则保持一致，使用小写字母和<code>-</code>分割路径名字，例如:</p>
-
-<pre><code>service-api.com/users
-service-api.com/app-setups
-</code></pre>
-
-<p>属性同样也要用小写字母，但是属性名字要用下划线<code>_</code>分割，因为这样在JavaScript语言中不用输入引号。 例如：</p>
-
-<pre><code class="json">service_class: &quot;first&quot;
-</code></pre>
-
-<h4>支持方便的无id间接引用</h4>
-
-<p>在某些情况下，让用户提供ID去定位资源是不方便的。例如，一个用户想取得他在Heroku平台app信息，但是这个app的唯一标识是UUID。这种情况下，你应该支持接口通过名字和ID都能访问，例如:</p>
-
-<pre><code>$ curl https://service.com/apps/{app_id_or_name}
-$ curl https://service.com/apps/97addcf0-c182
-$ curl https://service.com/apps/www-prod
-</code></pre>
-
-<p>不要只接受使用名字而放弃了使用id。</p>
-
-<h4>最小化路径嵌套</h4>
-
-<p>在一些有父路径/子路径嵌套关系的资源数据模块中，路径可能有非常深的嵌套关系，例如:</p>
-
-<pre><code>/orgs/{org_id}/apps/{app_id}/dynos/{dyno_id}
-</code></pre>
-
-<p>推荐在根(root)路径下指定资源来限制路径的嵌套深度。使用嵌套指定范围的资源。例如在上面的情况下，dyno属于app，app属于org可以表示为:</p>
-
-<pre><code>/orgs/{org_id}
-/orgs/{org_id}/apps
-/apps/{app_id}
-/apps/{app_id}/dynos
-/dynos/{dyno_id}
-</code></pre>
-
-<h3>响应（Responses）</h3>
-
 <h4>提供资源的(UU)ID</h4>
 
 <p>在默认情况给每一个资源一个<code>id</code>属性。除非有更好的理由，否则请使用UUID。不要使用那种在服务器上或是资源中不是全局唯一的标识，尤其是自动增长的id。</p>
 
 <p>生成小写的UUID格式 <code>8-4-4-4-12</code>，例如：</p>
 
-<pre><code class="json">&quot;id&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;
+<pre><code class="language-json">&quot;id&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;
 </code></pre>
 
 <h4>提供标准的时间戳</h4>
 
 <p>为资源提供默认的创建时间 <code>created_at</code> 和更新时间 <code>updated_at</code>，例如:</p>
 
-<pre><code class="json">{
+<pre><code class="language-json">{
   ...
   &quot;created_at&quot;: &quot;2012-01-01T12:00:00Z&quot;,
   &quot;updated_at&quot;: &quot;2012-01-01T13:00:00Z&quot;,
@@ -581,14 +578,14 @@ $ curl https://service.com/apps/www-prod
 
 <p>在接收和返回时都只使用UTC格式。ISO8601格式的数据，例如:</p>
 
-<pre><code class="json">&quot;finished_at&quot;: &quot;2012-01-01T12:00:00Z&quot;
+<pre><code class="language-json">&quot;finished_at&quot;: &quot;2012-01-01T12:00:00Z&quot;
 </code></pre>
 
 <h4>嵌套外键关系</h4>
 
 <p>使用嵌套对象序列化外键关联，例如:</p>
 
-<pre><code class="json">{
+<pre><code class="language-json">{
   &quot;name&quot;: &quot;service-production&quot;,
   &quot;owner&quot;: {
     &quot;id&quot;: &quot;5d8201b0...&quot;
@@ -599,16 +596,16 @@ $ curl https://service.com/apps/www-prod
 
 <p>而不是像这样:</p>
 
-<pre><code class="json">{
+<pre><code class="language-json">{
   &quot;name&quot;: &quot;service-production&quot;,
   &quot;owner_id&quot;: &quot;5d8201b0...&quot;,
   ...
 }
 </code></pre>
 
-<p>这种方式尽可能的把相关联的资源信息内联在一起，而不用改变资源的结构，或者引入更多的字段 例如:</p>
+<p>这种方式尽可能的把相关联的资源信息内联在一起，而不用改变资源的结构，或者引入更多的字段，例如:</p>
 
-<pre><code class="json">{
+<pre><code class="language-json">{
   &quot;name&quot;: &quot;service-production&quot;,
   &quot;owner&quot;: {
     &quot;id&quot;: &quot;5d8201b0...&quot;,
@@ -626,7 +623,7 @@ $ curl https://service.com/apps/www-prod
 <pre><code>HTTP/1.1 429 Too Many Requests
 </code></pre>
 
-<pre><code class="json">{
+<pre><code class="language-json">{
   &quot;id&quot;:      &quot;rate_limit&quot;,
   &quot;message&quot;: &quot;Account reached its API rate limit.&quot;,
   &quot;url&quot;:     &quot;https://docs.service.com/rate-limits&quot;
@@ -645,12 +642,12 @@ $ curl https://service.com/apps/www-prod
 
 <p>请求中多余的空格会增加响应大小，而且现在很多的HTTP客户端都会自己输出可读格式（<q>prettify</q>）的JSON。所以最好保证响应JSON最小化，例如：</p>
 
-<pre><code class="json">{&quot;beta&quot;:false,&quot;email&quot;:&quot;alice@heroku.com&quot;,&quot;id&quot;:&quot;01234567-89ab-cdef-0123-456789abcdef&quot;,&quot;last_login&quot;:&quot;2012-01-01T12:00:00Z&quot;,&quot;created_at&quot;:&quot;2012-01-01T12:00:00Z&quot;,&quot;updated_at&quot;:&quot;2012-01-01T12:00:00Z&quot;}
+<pre><code class="language-json">{&quot;beta&quot;:false,&quot;email&quot;:&quot;alice@heroku.com&quot;,&quot;id&quot;:&quot;01234567-89ab-cdef-0123-456789abcdef&quot;,&quot;last_login&quot;:&quot;2012-01-01T12:00:00Z&quot;,&quot;created_at&quot;:&quot;2012-01-01T12:00:00Z&quot;,&quot;updated_at&quot;:&quot;2012-01-01T12:00:00Z&quot;}
 </code></pre>
 
 <p>而不是这样：</p>
 
-<pre><code class="json">{
+<pre><code class="language-json">{
   &quot;beta&quot;: false,
   &quot;email&quot;: &quot;alice@heroku.com&quot;,
   &quot;id&quot;: &quot;01234567-89ab-cdef-0123-456789abcdef&quot;,
@@ -666,7 +663,7 @@ $ curl https://service.com/apps/www-prod
 
 <h4>提供机器可读的JSON模式</h4>
 
-<p>提供一个机器可读的模式来恰当的表现你的API。使用<br>
+<p>提供一个机器可读的模式来恰当的表现你的API。使用<br/>
 <a href="https://github.com/interagent/prmd">prmd</a>管理你的模式，并且确保用<code>prmd verify</code>验证是有效的。</p>
 
 <h4>提供人类可读的文档</h4>
@@ -703,6 +700,6 @@ $ curl -is https://$TOKEN@service.com/users
 
 <p>一旦你的API宣布产品正式版本及稳定版本时，不要在当前API版本中做一些不兼容的改变。如果你需要，请创建一个新的版本的API。</p>
 
-</body>
+</div></body>
 
 </html>

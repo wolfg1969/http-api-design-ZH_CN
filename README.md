@@ -1,9 +1,9 @@
 # HTTP API 设计指南
 > 翻译自 `HTTP API Design Guide` [https://github.com/interagent/http-api-design](https://github.com/interagent/http-api-design)
 
-- 更新时间：`2015-02-04` 更新至 [#2a74f45](https://github.com/interagent/http-api-design/commit/2a74f45b9afaf6c951352f36c3a4e1b0418ed10b)
+- 更新时间：`2015-10-08` 更新至 [#50bda6](https://github.com/interagent/http-api-design/commit/50bda693252a4f52653d638fd5503b39b88b8470)
 - 欢迎大家问题和共同维护这个文档
-- HTML和PDF通过`Mou`生成
+- HTML和PDF通过`MWeb`生成
 - 翻译人员见`CONTRIBUTORS.md`
 
 ## 前言
@@ -390,3 +390,5 @@ $ curl -is https://$TOKEN@service.com/users
 更多关于可能的稳定性和改变管理的方式，查看 [Heroku API compatibility policy](https://devcenter.heroku.com/articles/api-compatibility-policy)
 
 一旦你的API宣布产品正式版本及稳定版本时，不要在当前API版本中做一些不兼容的改变。如果你需要，请创建一个新的版本的API。
+
+
